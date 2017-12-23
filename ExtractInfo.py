@@ -93,7 +93,7 @@ def Left_Heart_System(inputstr):
                 print(Left_Heart_house_content, Left_Heart_house_flag)
                 break
         for index_v,item_v in enumerate(Left_Heart_ventricle_des):
-            Left_Heart_ventricle_content =  re.findall(u'左室[\W\s\d\w]*[^房]腔?%s' % (item_v),Left_Heart_System_content[0])
+            Left_Heart_ventricle_content =  re.findall(u'左室腔?%s' % (item_v),Left_Heart_System_content[0])
             if len(Left_Heart_ventricle_content) > 0:
                 Left_Heart_ventricle_flag = index_v
                 break
@@ -136,13 +136,16 @@ def Right_Heart_System(inputstr):
     for index_h, item_h in enumerate(Right_Heart_house_des):
         Right_Heart_house_content = re.findall(u'右房[\W\s\d\w]*?腔?[\W\s\d\w]*?%s' % (item_h),
                                                inputstr)
-        if len(Right_Heart_house_des) > 0:
+        if len(Right_Heart_house_content) > 0:
             Right_Heart_house_flag = index_h
+            #print( Right_Heart_house_content, Right_Heart_house_flag )
             break
     for index_v,item_v in enumerate(Right_Heart_ventricle_des):
-        Right_Heart_ventricle_content =  re.findall(u'右室[\W\s\d\w]*[^房]腔?%s' % (item_v), inputstr)
+        Right_Heart_ventricle_content =  re.findall(u'右室腔?%s' % (item_v), inputstr)
         if len(Right_Heart_ventricle_content) > 0:
             Right_Heart_ventricle_flag = index_v
+            print(Right_Heart_ventricle_content, Right_Heart_ventricle_flag)
+            break
     return Right_Heart_house_flag, Right_Heart_ventricle_flag
 
 if __name__ == '__main__':
@@ -162,7 +165,8 @@ if __name__ == '__main__':
         Var = ExtractInfo(ReportDescribe)
         Left_Systolic_flag, Left_Diastolic_flag = Left_Ventricle(ReportDiagnose)
         #root_flag, pulse_flag, abnormal = AortaRoot(ReportDescribe)
-        Left_Heart_System(ReportDescribe)
+        #Left_Heart_System(ReportDescribe)
+        Right_Heart_System(ReportDescribe)
         #Aortic_Vaives(ReportDescribe)
         #Var = ExtractInfo(MainReportDescribe)
         #Left_Systolic_flag, Left_Diastolic_flag = Left_Ventricle(MainReportDescribe)
